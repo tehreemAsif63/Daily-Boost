@@ -3,21 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <title>Title</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Delius+Unicase:wght@400;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+      body {
+        background-color: #eeebd0;
+        color: #e86252;
+      }
+      #message {
+        font-family: 'Delius Unicase', sans-serif;
+        color: #ee2677;
+        font-size: 2.5rem;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
     <h1>Welcome to InspireMe!</h1>
     <main>
-        <div class="message">Click the Button For Motivation!</div>
-        <button onclick="getMotivation()">Let's Go</button>
+      <div id="message">Click the Button For Motivation!</div>
+      <button id="motivationBtn" onclick="getMotivation()">Let's Go</button>
     </main>
 
-
     <script>
-        function getMotivation() {
-            fetch("/motivation")
-                .then(response => response.text())
-                .then(msg => document.getElementById("message").innerText = msg);
-        }
+      document.addEventListener("DOMContentLoaded", () => {
+        const button = document.getElementById("motivationBtn");
+        const messageDiv = document.getElementById("message");
+        const h2tag = document.getElementsByTagName("h1");
+
+        button.addEventListener("click", () => {
+          console.log("pressed");
+          fetch("http://localhost:8080/motivation")
+            .then((response) => response.text())
+            .then((msg) => (messageDiv.innerText = msg))
+            .catch((err) => {
+              console.error("Error fetching motivation:", err);
+              messageDiv.innerText = "Oops! Something went wrong.";
+            });
+          h2tag.style.display = "none";
+        });
+      });
     </script>
   </body>
 </html>
