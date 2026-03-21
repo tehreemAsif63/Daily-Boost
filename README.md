@@ -32,3 +32,7 @@ A simple web application that delivers random motivational messages to users.
 ## Demo
 - Backend API endpoint `/motivation` returns random messages
 - Frontend fetches messages and displays them dynamically
+
+## To do
+
+- Add API, spring web e.t.c.
